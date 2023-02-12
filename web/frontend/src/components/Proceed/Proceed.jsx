@@ -4,28 +4,31 @@ import SignatureCanvas from "react-signature-canvas";
 import html2canvas from "html2canvas";
 import axios from "axios";
 import { Buffer } from "buffer";
-const Proceed = () => {
-  const loginfun = () => {
-    let data1, data2;
-    html2canvas(document.getElementById("drawpad1")).then(function (canvas) {
-      // document.getElementById("output").appendChild(canvas);
-      data1 = canvas.toDataURL("image/png");
-    });
-    html2canvas(document.getElementById("drawpad1")).then(function (canvas) {
-      // document.getElementById("output").appendChild(canvas);
-      data2 = canvas.toDataURL("image/png");
-    });
 
-    const buffer1 = Buffer.from(data1, "base64");
-    const buffer2 = Buffer.from(data2, "base64");
-    axios
-      .post("http://localhost/5000/api/login", {
-        // userID: userID,
-        // password: buffer,
-      })
-      .then((res) => {
-        console.log(res);
+const Proceed = () => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const activefun = () => {
+    let data1, data2;
+
+    html2canvas(document.getElementById("drawpad1")).then(function (canvas) {
+      data1 = canvas.toDataURL("image/png");
+      html2canvas(document.getElementById("drawpad2")).then(function (canvas) {
+        data2 = canvas.toDataURL("image/png");
+        const buffer1 = Buffer.from(data1, "base64");
+        const buffer2 = Buffer.from(data2, "base64");
+        axios
+          .post("http://localhost:5000/api/active", {
+            password1: buffer1,
+            password2: buffer2,
+            active_token: urlParams.get("token"),
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => console.log(err));
       });
+    });
   };
   return (
     <div className="row">
@@ -101,7 +104,7 @@ const Proceed = () => {
               style={{ height: 300, marginTop: 10, marginLeft: 110 }}
             >
               <SignatureCanvas
-                penColor="green"
+                penColor="black"
                 canvasProps={{
                   width: 400,
                   height: 300,
@@ -119,7 +122,7 @@ const Proceed = () => {
               style={{ height: 300, marginTop: 10, marginLeft: 110 }}
             >
               <SignatureCanvas
-                penColor="green"
+                penColor="black"
                 canvasProps={{
                   width: 400,
                   height: 300,
@@ -136,6 +139,7 @@ const Proceed = () => {
               color: "white",
               marginLeft: "7rem",
             }}
+            onClick={activefun}
           >
             Proceed
           </button>

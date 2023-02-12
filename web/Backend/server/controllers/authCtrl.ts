@@ -39,7 +39,7 @@ const authCtrl = {
 
       const active_token = generateActiveToken({ newUser });
 
-      const url = `${CLIENT_URL}/active/${active_token}`;
+      const url = `${CLIENT_URL}/proceed?token=${active_token}`;
 
       if (validateEmail(email)) {
         sendMail(email, url, "Verify your email address");
@@ -64,21 +64,25 @@ const authCtrl = {
 
   activeAccount: async (req: Request, res: Response) => {
     try {
-      const { active_token } = req.body;
+      const { active_token, password1, password2 } = req.body;
 
       const decoded = <IDecodedToken>(
         jwt.verify(active_token, `${process.env.ACTIVE_TOKEN_SECRET}`)
       );
-
+      console.log(decoded);
       const { newUser } = decoded;
-
+      console.log(newUser);
       if (!newUser)
         return res.status(400).json({ msg: "Invalid authentication." });
 
-      const user = await Users.findOne({ account: newUser.account });
+      const user = await Users.findOne({ email: newUser.email });
       if (user) return res.status(400).json({ msg: "Account already exists." });
 
-      const new_user = new Users(newUser);
+      const new_user = new Users({
+        ...newUser,
+        password1: password1,
+        password2: password2,
+      });
 
       const newuser = await new_user.save();
       res.json({ msg: "Account has been activated!" });

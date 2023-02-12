@@ -13,8 +13,11 @@ export interface IUser extends Document {
 
 export interface INewUser {
   name: string;
-  account: string;
-  password: string;
+  email: string;
+  accountno: Number;
+  uidai: Number;
+  // password1: Buffer;
+  // password2: Buffer;
 }
 
 export interface INotice extends Document {

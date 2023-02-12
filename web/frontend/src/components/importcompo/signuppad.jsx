@@ -19,7 +19,7 @@ function Pad() {
         style={{ height: 300, marginTop: 10, marginLeft: 110 }}
       >
         <SignatureCanvas
-          penColor="green"
+          penColor="black"
           canvasProps={{ width: 400, height: 300, className: "sigCanvas" }}
         />
       </div>
