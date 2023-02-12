@@ -95,15 +95,6 @@ const authCtrl = {
       const new_user = new Users(newUser);
 
       const newuser = await new_user.save();
-
-      notificationCtrl.addNotification(
-        newuser._id,
-        "Welcome! to Pediageeks world.",
-        "Hii! " +
-          " " +
-          newuser.name +
-          "on behalf of whole pediageek team we welcome you to the platform.Try each and every feature on platform make your own brand on the platform."
-      );
       res.json({ msg: "Account has been activated!" });
     } catch (err: any) {
       return res.status(500).json({ msg: err.message });
