@@ -1,5 +1,6 @@
 import React from "react";
-import './Proceed.css'
+import "./Proceed.css";
+import Pad from "../importcompo/signuppad";
 
 const Proceed = () => {
   return (
@@ -68,14 +69,26 @@ const Proceed = () => {
           <h2>
             <b> Create Account</b>
           </h2>
-          <div className=" colour mt-3 rounded-3" id="drawpad" style={{height:'14rem',width:'34rem'}}>
-            <div id="watermark"> Draw your pattern</div>
-          </div>
-          <div className=" colour mt-4 rounded-3" id="drawpad" style={{height:'14rem',width:'34rem',}}>
-            <div id="watermark"> Confirm Pattern</div>
-          </div>
-          <button className="btn rounded-3 mt-4  text-center" style={{backgroundColor:'#769BC1',width:'35%',color:'white',marginLeft:'7rem'}}>Proceed</button>
-          <h5 className="mt-3" style={{fontSize:'0.9rem',marginLeft:'7rem'}}>Already have an account? <a href="">Login Now</a></h5>
+          <Pad />
+          <br />
+          <Pad />
+          <button
+            className="btn rounded-3 mt-4  text-center"
+            style={{
+              backgroundColor: "#769BC1",
+              width: "35%",
+              color: "white",
+              marginLeft: "7rem",
+            }}
+          >
+            Proceed
+          </button>
+          <h5
+            className="mt-3"
+            style={{ fontSize: "0.9rem", marginLeft: "7rem" }}
+          >
+            Already have an account? <a href="">Login Now</a>
+          </h5>
         </div>
       </div>
     </div>

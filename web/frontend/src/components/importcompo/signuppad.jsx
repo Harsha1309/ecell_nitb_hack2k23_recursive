@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./pad.css";
+import ReactDOM from "react-dom";
+import SignatureCanvas from "react-signature-canvas";
 
 function Pad() {
-  const canvas = document.getElementById("drawpad");
-  const paintboard = canvas.getContext("2d");
   const [start, setStart] = useState(false);
   const [mousePos, setMousePos] = useState({});
   const signstart = () => {
@@ -24,12 +24,18 @@ function Pad() {
   useEffect(() => {}, [mousePos]);
 
   return (
-    <div
-      className="patt colour mt-3 m-auto rounded-3"
-      id="drawpad"
-      onClick={signstart}
-    >
-      <div id="watermark">Draw your Pattern</div>
+    <div>
+      <div id="watermark">Draw Here </div>
+      <div
+        className="patt"
+        id="drawpad"
+        style={{ height: 300, marginTop: 10, marginLeft: 110 }}
+      >
+        <SignatureCanvas
+          penColor="green"
+          canvasProps={{ width: 500, height: 200, className: "sigCanvas" }}
+        />
+      </div>
     </div>
   );
 }
