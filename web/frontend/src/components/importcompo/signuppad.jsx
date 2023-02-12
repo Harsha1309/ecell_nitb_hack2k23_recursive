@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./pad.css";
 import ReactDOM from "react-dom";
-import CanvasDraw from "react-canvas-draw";
+import SignatureCanvas from "react-signature-canvas";
 
 function Pad() {
   const [start, setStart] = useState(false);
@@ -25,17 +25,15 @@ function Pad() {
 
   return (
     <div>
-      <div id="watermark">Draw Here    </div>
+      <div id="watermark">Draw Here </div>
       <div
         className="patt"
         id="drawpad"
         style={{ height: 300, marginTop: 10, marginLeft: 110 }}
       >
-        <CanvasDraw
-          canvasWidth={400}
-          canvasHeight={300}
-          backgroundColor={"#EAF0F7"}
-          brushRadius={10}
+        <SignatureCanvas
+          penColor="green"
+          canvasProps={{ width: 500, height: 200, className: "sigCanvas" }}
         />
       </div>
     </div>
