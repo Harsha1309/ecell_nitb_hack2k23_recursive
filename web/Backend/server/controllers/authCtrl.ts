@@ -52,8 +52,8 @@ const authCtrl = {
   company: async (req: Request, res: Response) => {
     try {
       const { org, email, password } = req.body;
-      const passwordHash = await bcrypt.hash(password, 12);
-      const newUser = { org, email, password: passwordHash };
+      // const passwordHash = await bcrypt.hash(password, 12);
+      const newUser = { org, email, password };
       const new_company = new Compnaies(newUser);
       await new_company.save();
       return res.json({ msg: "added to our database." });

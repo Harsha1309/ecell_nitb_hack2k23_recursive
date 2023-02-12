@@ -37,4 +37,4 @@ const companySchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("category", companySchema);
+export default mongoose.model("company", companySchema);
