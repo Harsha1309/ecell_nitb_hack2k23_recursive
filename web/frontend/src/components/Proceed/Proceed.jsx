@@ -20,8 +20,8 @@ const Proceed = () => {
     const buffer2 = Buffer.from(data2, "base64");
     axios
       .post("http://localhost/5000/api/login", {
-        userID: userID,
-        password: buffer,
+        // userID: userID,
+        // password: buffer,
       })
       .then((res) => {
         console.log(res);
