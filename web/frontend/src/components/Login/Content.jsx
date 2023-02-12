@@ -8,17 +8,14 @@ import { Buffer } from "buffer";
 
 function Content() {
   const [password, setpassword] = useState();
-  const [userID, setUserID] = useState("");
+  const [email, setEmail] = useState("");
 
   const loginfun = () => {
     html2canvas(document.getElementById("drawpad")).then(function (canvas) {
-      // document.getElementById("output").appendChild(canvas);
       const data = canvas.toDataURL("image/png");
       const buffer = Buffer.from(data, "base64");
-      console.log(buffer);
-      // const [state, setstate] = useState(initialState);
       axios
-        .post("http://localhost/5000/api/login", {
+        .post("http://localhost:5000/api/login", {
           email: email,
           password: buffer,
         })
@@ -67,7 +64,9 @@ function Content() {
             name="email"
             id=""
             value={email}
-            onChange={handleEmail}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
             placeholder="Email"
             style={{
               width: "400px",
