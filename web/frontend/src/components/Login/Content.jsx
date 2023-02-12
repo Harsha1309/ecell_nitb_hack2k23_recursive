@@ -41,10 +41,10 @@ function Content() {
           <h4>Enter your credentials</h4>
           <input
             className="mt-3 text-center colour rounded-2"
-            type="text"
-            name="user"
+            type="email"
+            name="email"
             id=""
-            placeholder="User ID"
+            placeholder="Email"
             style={{
               width: "400px", 
               paddingTop: "0.5rem",

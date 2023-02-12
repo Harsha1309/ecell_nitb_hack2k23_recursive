@@ -15,6 +15,13 @@ const companySchema = new mongoose.Schema(
       trim: true,
       unique: true,
     },
+    password: {
+      type: String,
+      required: [true, "Please add your category"],
+      trim: true,
+      unique: true,
+      maxLength: [50, "Name is up to 50 chars long."],
+    },
     plan: {
       type: String,
       trim: true,
