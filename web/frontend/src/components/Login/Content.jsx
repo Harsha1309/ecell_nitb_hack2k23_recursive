@@ -19,7 +19,7 @@ function Content() {
       // const [state, setstate] = useState(initialState);
       axios
         .post("http://localhost/5000/api/login", {
-          userID: userID,
+          email: email,
           password: buffer,
         })
         .then((res) => {
@@ -66,6 +66,8 @@ function Content() {
             type="email"
             name="email"
             id=""
+            value={email}
+            onChange={handleEmail}
             placeholder="Email"
             style={{
               width: "400px",
