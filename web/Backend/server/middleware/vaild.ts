@@ -5,7 +5,7 @@ export const validRegister = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { name, accountno, email, uidai } = req.body;
+  const { name, org,accountno, email, uidai,password } = req.body;
 
   const errors = [];
 

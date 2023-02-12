@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const companySchema = new mongoose.Schema(
   {
-    name: {
+    org: {
       type: String,
       required: [true, "Please add your category"],
       trim: true,
@@ -18,10 +18,11 @@ const companySchema = new mongoose.Schema(
     plan: {
       type: String,
       trim: true,
+      default: "free",
     },
     apicount: {
       type: Number,
-      default: true,
+      default: 0,
     },
   },
   {
