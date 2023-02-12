@@ -1,36 +1,36 @@
 import axios from "axios";
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Register.css";
 
 const Register = () => {
-    
-    const [name, setName] = useState('');
-    const [acnum, setAcnum] = useState('');
-    const [email, setEmail] = useState('');
-    const [uidai, setUidai] = useState('');
+  const [name, setName] = useState("");
+  const [acnum, setAcnum] = useState("");
+  const [email, setEmail] = useState("");
+  const [uidai, setUidai] = useState("");
 
-    const handleName=(event)=>{
-        setName(event.target.value)
-    }    
-    const handleAcnum=(event)=>{
-        setAcnum(event.target.value)
-    }
-    const handleEmail=(event)=>{
-        setEmail(event.target.value)
-    }    
-    const handleUidai=(event)=>{
-        setUidai(event.target.value)
-    }
-    const handleAPI=()=>{
-        console.log(name,acnum,email,uidai);
-        axios.post('http://localhost:5000/api/register',{
-            name:name,
-            accountno:acnum,
-            email:email,
-            uidai:uidai
-        })
-    }
+  const handleName = (event) => {
+    setName(event.target.value);
+  };
+  const handleAcnum = (event) => {
+    setAcnum(event.target.value);
+  };
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
+  };
+  const handleUidai = (event) => {
+    setUidai(event.target.value);
+  };
+  const handleAPI = (e) => {
+    e.preventDefault();
+    console.log(name, acnum, email, uidai);
+    axios.post("http://localhost:5000/api/register", {
+      name: name,
+      accountno: acnum,
+      email: email,
+      uidai: uidai,
+    });
+  };
 
   return (
     <div className="row">
@@ -47,7 +47,7 @@ const Register = () => {
           alt="Register page image"
         />
       </div>
-      <div className="col-6 mt-4" style={{borderRadius:'50rem'}}>
+      <div className="col-6 mt-4" style={{ borderRadius: "50rem" }}>
         <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
           <button
             className="navbar-toggler"
@@ -94,22 +94,62 @@ const Register = () => {
             </ul>
           </div>
         </nav>
-        <div className='' style={{marginTop:'10rem',marginLeft:'5rem'}}>
-        <h1>Create Account</h1>
-        <form action="">
-            <input className="mt-3 bord ps-2" type="text" name="name" value={name} onChange={handleName} placeholder="Name" />
+        <div className="" style={{ marginTop: "10rem", marginLeft: "5rem" }}>
+          <h1>Create Account</h1>
+          <form action="">
+            <input
+              className="mt-3 bord ps-2"
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleName}
+              placeholder="Name"
+            />
             <br />
-            <input className="mt-3 bord ps-2" type="text" name="ac num" value={acnum} onChange={handleAcnum} placeholder="A/C Number" />
+            <input
+              className="mt-3 bord ps-2"
+              type="text"
+              name="ac num"
+              value={acnum}
+              onChange={handleAcnum}
+              placeholder="A/C Number"
+            />
             <br />
-            <input className="mt-3 bord ps-2" type="email" name="contact" value={email} onChange={handleEmail} placeholder="Email Address" />
+            <input
+              className="mt-3 bord ps-2"
+              type="email"
+              name="contact"
+              value={email}
+              onChange={handleEmail}
+              placeholder="Email Address"
+            />
             <br />
-            <input className="mt-3 bord ps-2" type="text" name="uidai" value={uidai} onChange={handleUidai} placeholder="UIDAI" />
+            <input
+              className="mt-3 bord ps-2"
+              type="text"
+              name="uidai"
+              value={uidai}
+              onChange={handleUidai}
+              placeholder="UIDAI"
+            />
             <br />
             {/* <Link to="/proceed"> */}
-              <button className="btn rounded-3 mt-5 ms-2 text-center" onClick={handleAPI} style={{backgroundColor:'#769BC1',width:'35%',color:'white'}}>Proceed</button>
-              {/* </Link>/ */}
-            <h5 className="mt-3 bord " style={{fontSize:'0.9rem'}}>Already have an account? <a href="">Login Now</a></h5>
-        </form>
+            <button
+              className="btn rounded-3 mt-5 ms-2 text-center"
+              onClick={(e) => handleAPI(e)}
+              style={{
+                backgroundColor: "#769BC1",
+                width: "35%",
+                color: "white",
+              }}
+            >
+              Proceed
+            </button>
+            {/* </Link>/ */}
+            <h5 className="mt-3 bord " style={{ fontSize: "0.9rem" }}>
+              Already have an account? <a href="">Login Now</a>
+            </h5>
+          </form>
         </div>
       </div>
     </div>

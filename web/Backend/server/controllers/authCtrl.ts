@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Users from "../models/userModel";
+import Compnaies from "../models/comanyModel";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {
@@ -51,25 +52,11 @@ const authCtrl = {
   company: async (req: Request, res: Response) => {
     try {
       const { org, email, password } = req.body;
-
-      const user = await Users.findOne({ email });
-      if (user)
-        return res
-          .status(400)
-          .json({ msg: "Email or Phone number already exists." });
-
       const passwordHash = await bcrypt.hash(password, 12);
-
-      const newUser = { org, email, password };
-
-      const active_token = generateActiveToken({ newUser });
-
-      const url = `${CLIENT_URL}/active/${active_token}`;
-
-      if (validateEmail(email)) {
-        sendMail(email, url, "Verify your email address");
-        return res.json({ msg: "Success! Please check your email." });
-      }
+      const newUser = { org, email, password: passwordHash };
+      const new_company = new Compnaies(newUser);
+      await new_company.save();
+      return res.json({ msg: "added to our database." });
     } catch (err: any) {
       return res.status(500).json({ msg: err.message });
     }
@@ -102,11 +89,10 @@ const authCtrl = {
   login: async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body;
-
+      console.log(email, password);
       const user = await Users.findOne({ email });
       if (!user)
         return res.status(400).json({ msg: "This account does not exits." });
-
       // if user exists
       loginUser(user, password, res);
     } catch (err: any) {
