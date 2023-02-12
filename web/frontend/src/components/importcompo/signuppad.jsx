@@ -6,22 +6,9 @@ import SignatureCanvas from "react-signature-canvas";
 function Pad() {
   const [start, setStart] = useState(false);
   const [mousePos, setMousePos] = useState({});
-  const signstart = () => {
-    setStart(!start);
-  };
   useEffect(() => {
-    if (!start) return;
-    const handleMouseMove = (event) => {
-      setMousePos({ x: event.clientX, y: event.clientY });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, [start]);
-  useEffect(() => {}, [mousePos]);
+    
+  }, [mousePos]);
 
   return (
     <div>
@@ -33,7 +20,7 @@ function Pad() {
       >
         <SignatureCanvas
           penColor="green"
-          canvasProps={{ width: 500, height: 200, className: "sigCanvas" }}
+          canvasProps={{ width: 400, height: 300, className: "sigCanvas" }}
         />
       </div>
     </div>

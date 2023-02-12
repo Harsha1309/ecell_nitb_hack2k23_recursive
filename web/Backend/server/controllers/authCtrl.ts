@@ -24,9 +24,9 @@ const CLIENT_URL = `${process.env.BASE_URL}`;
 const authCtrl = {
   register: async (req: Request, res: Response) => {
     try {
-      const { name, accountno,email,uidai} = req.body;
+      const { name, accountno, email, uidai } = req.body;
 
-      const user = await Users.findOne({ email});
+      const user = await Users.findOne({ email });
       if (user)
         return res
           .status(400)
@@ -34,7 +34,7 @@ const authCtrl = {
 
       // const passwordHash = await bcrypt.hash(password, 12);
 
-      const newUser = { name, accountno,email,uidai };
+      const newUser = { name, accountno, email, uidai };
 
       const active_token = generateActiveToken({ newUser });
 
@@ -50,9 +50,9 @@ const authCtrl = {
   },
   company: async (req: Request, res: Response) => {
     try {
-      const { org,email,password} = req.body;
+      const { org, email, password } = req.body;
 
-      const user = await Users.findOne({ email});
+      const user = await Users.findOne({ email });
       if (user)
         return res
           .status(400)
@@ -60,7 +60,7 @@ const authCtrl = {
 
       const passwordHash = await bcrypt.hash(password, 12);
 
-      const newUser = { org,email,password };
+      const newUser = { org, email, password };
 
       const active_token = generateActiveToken({ newUser });
 
@@ -74,7 +74,6 @@ const authCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
-
 
   activeAccount: async (req: Request, res: Response) => {
     try {
@@ -111,14 +110,14 @@ const authCtrl = {
   },
   login: async (req: Request, res: Response) => {
     try {
-      const { account, password } = req.body;
+      const { email, buffer } = req.body;
 
-      const user = await Users.findOne({ account });
+      const user = await Users.findOne({ email });
       if (!user)
         return res.status(400).json({ msg: "This account does not exits." });
 
       // if user exists
-      loginUser(user, password, res);
+      loginUser(user, buffer, res);
     } catch (err: any) {
       return res.status(500).json({ msg: err.message });
     }

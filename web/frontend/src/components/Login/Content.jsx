@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Pad from "../importcompo/signuppad";
 import "./Content.css";
-// import Pad from "../importcompo/signuppad.jsx";
+import SignatureCanvas from "react-signature-canvas";
+import html2canvas from "html2canvas";
+import axios from "axios";
+import { Buffer } from "buffer";
 
 function Content() {
+  const [password, setpassword] = useState();
+  const [userID, setUserID] = useState("");
+
+  const loginfun = () => {
+    html2canvas(document.getElementById("drawpad")).then(function (canvas) {
+      // document.getElementById("output").appendChild(canvas);
+      const data = canvas.toDataURL("image/png");
+      const buffer = Buffer.from(data, "base64");
+      console.log(buffer);
+      // const [state, setstate] = useState(initialState);
+      axios
+        .post("http://localhost/5000/api/login", {
+          userID: userID,
+          password: buffer,
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    });
+  };
   return (
     <>
       <div className="row firstGrid">
@@ -46,14 +68,29 @@ function Content() {
             id=""
             placeholder="Email"
             style={{
-              width: "400px", 
+              width: "400px",
               paddingTop: "0.5rem",
               paddingBottom: "0.5rem",
             }}
           />
           <br />
-          {/* <textarea name="pattern" className="mt-3 text-center colour rounded-3" id="" cols="50" rows="10" placeholder="Draw your pattern"></textarea><br /> */}
-          <Pad/>
+          <div>
+            <div id="watermark">Draw Here </div>
+            <div
+              className="patt"
+              id="drawpad"
+              style={{ height: 300, marginTop: 10, marginLeft: 110 }}
+            >
+              <SignatureCanvas
+                penColor="green"
+                canvasProps={{
+                  width: 400,
+                  height: 300,
+                  className: "sigCanvas",
+                }}
+              />
+            </div>
+          </div>
           <p
             className="mt-2 text-end "
             style={{ right: "7rem", position: "relative" }}
@@ -64,11 +101,13 @@ function Content() {
             type="button"
             className="btn btn-primary mt-3"
             style={{ width: "400px" }}
+            onClick={loginfun}
           >
             Sign in
           </button>
         </div>
       </div>
+      <div id="output"></div>
     </>
   );
 }
