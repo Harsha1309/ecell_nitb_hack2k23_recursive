@@ -22,10 +22,10 @@ function Content() {
           password: buffer,
         })
         .then((res) => {
-          console.log(res);
+          alert('Successfully registered');
         })
         .catch((err) => {
-          console.log(err);
+          alert('Please make valid signs')
         });
     });
   };
