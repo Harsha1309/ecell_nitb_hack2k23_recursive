@@ -14,6 +14,8 @@ function Content() {
     html2canvas(document.getElementById("drawpad")).then(function (canvas) {
       const data = canvas.toDataURL("image/png");
       const buffer = Buffer.from(data, "base64");
+      console.log(data);
+      console.log(buffer);
       axios
         .post("http://localhost:5000/api/login", {
           email: email,

@@ -9,10 +9,11 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello, World!'
 
-@app.route('/match', methods=['GET'])
+@app.route('/match', methods=['POST'])
 def match():
     # Get the buffer data of the first image
     img_data1 = request.files['img1'].read()
+    print(img_data1)
     # Get the buffer data of the second image
     img_data2 = request.files['img2'].read()
     # Read the images from the buffer data
@@ -33,6 +34,12 @@ def match():
     }
     # Return the result as a JSON object
     return jsonify(result)
+
+
+@app.route('/match1', methods=['GET'])
+def match1():
+    return "abc"
+
 
 if __name__ == '__main__':
     app.run(debug=True)
