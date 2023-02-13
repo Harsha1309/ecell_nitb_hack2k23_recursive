@@ -73,4 +73,4 @@ def imagecheck(path1,path2) :
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="localhost", port=6000, debug=True)

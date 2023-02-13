@@ -85,7 +85,7 @@ function Content() {
             <div
               className="patt"
               id="drawpad"
-              style={{ height: 300, marginTop: 10, marginLeft: 110 }}
+              style={{ height: 300, marginTop: 10, marginLeft: 100 }}
             >
               <SignatureCanvas
                 penColor="black"
@@ -93,6 +93,7 @@ function Content() {
                   width: 400,
                   height: 300,
                   className: "sigCanvas",
+                  backgroundColor:'#add8e64a'
                 }}
               />
             </div>

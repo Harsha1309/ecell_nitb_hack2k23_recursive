@@ -35,7 +35,7 @@ const authCtrl = {
 
       // const passwordHash = await bcrypt.hash(password, 12);
 
-      const newUser = { name, accountno, email, uidai, };
+      const newUser = { name, accountno, email, uidai };
 
       const active_token = generateActiveToken({ newUser });
 
@@ -95,11 +95,10 @@ const authCtrl = {
   login: async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body;
-      console.log(email, password);
       const user = await Users.findOne({ email });
       if (!user)
         return res.status(400).json({ msg: "This account does not exits." });
-      // if user exists
+      // // if user exists
       loginUser(user, password, res);
     } catch (err: any) {
       return res.status(500).json({ msg: err.message });
@@ -146,16 +145,17 @@ const authCtrl = {
   },
 };
 
-const loginUser = async (user: IUser, password: string, res: Response) => {
-  const isMatch = true; //here to call python api for validation
-
-  const access_token = generateAccessToken({ id: user._id });
+export const loginUser = async (
+  user: IUser,
+  password: string,
+  res: Response
+) => {
+  
 
   return res.json({
     msg: "Login Success!",
   });
 };
-
 const registerUser = async (user: IUserParams, res: Response) => {
   const newUser = new Users(user);
 
