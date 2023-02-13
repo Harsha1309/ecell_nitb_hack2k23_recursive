@@ -2,15 +2,16 @@ from flask import Flask, request, jsonify
 import cv2
 from skimage.metrics import structural_similarity as ssim
 import requests
+import os
 
 # # TODO add contour detection for enhanced accuracy
 # path1="https://images.dog.ceo/breeds/chihuahua/n02085620_3742.jpg"
 # path2="https://images.dog.ceo/breeds/chihuahua/n02085620_3742.jpg"
 
 
-img_data = requests.get("https://images.dog.ceo/breeds/pitbull/IMG_20190826_121528_876.jpg").content
-with open('image_name.jpg', 'wb') as handler:
-    handler.write(img_data)
+# img_data = requests.get("https://images.dog.ceo/breeds/pitbull/IMG_20190826_121528_876.jpg").content
+# with open('image_name.jpg', 'wb') as handler:
+#     handler.write(img_data)
 
 # img1_data = requests.get("https://images.dog.ceo/breeds/lhasa/n02098413_7163.jpg").content
 # with open('image_name1.jpg', 'wb') as handler:
@@ -60,12 +61,22 @@ def match():
     img_data2 = variable_name['img2']
     # Read the images from the buffer data
     img_data = requests.get(img_data1).content
-    with open('image_name.jpg', 'wb') as handler:
+    with open('image_name1.jpg', 'wb') as handler:
         handler.write(img_data)
     img_data = requests.get(img_data2).content
-    with open('image_name.jpg', 'wb') as handler:
+    with open('image_name2.jpg', 'wb') as handler:
         handler.write(img_data)
+    result=imagecheck("image_name1.jpg","image_name2.jpg")
+    os.remove("image_name1.jpg")
+    os.remove("image_name2.jpg")
+    return result
 
+
+
+
+def imagecheck(path1,path2) : 
+    img1 = cv2.imread(path1)
+    img2 = cv2.imread(path2)
     # Turn images to grayscale
     img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
     img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
@@ -81,6 +92,7 @@ def match():
     }
     # Return the result as a JSON object
     return jsonify(result)
+
 
 
 
