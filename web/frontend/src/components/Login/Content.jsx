@@ -22,11 +22,13 @@ function Content() {
           password: buffer,
         })
         .then((res) => {
-          alert('You pattern has been matched,');
-          <Link to='/user'></Link>
+          
+          alert('Please make valid signs')
         })
         .catch((err) => {
-          alert('Please make valid signs')
+          alert('You pattern has been matched,');
+          // confirm("You pattern has been matched,")
+          window.location.href = "/user";
         });
     });
   };

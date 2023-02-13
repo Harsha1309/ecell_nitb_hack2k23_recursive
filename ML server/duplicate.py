@@ -37,7 +37,6 @@ def match1():
     # Get the buffer data of the second image
     img_data2 = base64.b64decode((variable_name['img2']))
     # Read the images from the buffer data
-    
     with open('image_name1.jpg', 'wb') as handler:
         handler.write(img_data1)
     
@@ -68,9 +67,6 @@ def imagecheck(path1,path2) :
     }
     # Return the result as a JSON object
     return jsonify(result)
-
-
-
 
 if __name__ == '__main__':
     app.run(host="localhost", port=6000, debug=True)

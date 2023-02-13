@@ -101,7 +101,21 @@ const authCtrl = {
       if (!user)
         return res.status(400).json({ msg: "This account does not exits." });
       // // if user exists
-      loginUser(user, password, res);
+      console.log(user.password1);
+      axios
+        .post("http://localhost:6000/match1", {
+          img1: password,
+          img2: user.password1,
+        })
+        .then((ret) => {
+          if (ret.data.simmilarity > 76) return res.json({ success: true });
+          else return res.json({ success: false });
+        })
+        .catch((err) => {
+          return res
+            .status(400)
+            .json({ msg: "i am facing some issues try again later." });
+        });
     } catch (err: any) {
       return res.status(500).json({ msg: err.message });
     }
@@ -147,26 +161,6 @@ const authCtrl = {
   },
 };
 
-export const loginUser = async (
-  user: IUser,
-  password: Buffer,
-  res: Response
-) => {
-  axios
-    .post("http://localhost:6000/match", {
-      img1: password,
-      img2: user.password1,
-    })
-    .then((ret) => {
-      if (ret.data.simmilarity > 81) return res.json({ success: true });
-      else return res.json({ success: false });
-    })
-    .catch((err) => {
-      return res
-        .status(400)
-        .json({ msg: "i am facing some issues try again later." });
-    });
-};
 const registerUser = async (user: IUserParams, res: Response) => {
   const newUser = new Users(user);
 
