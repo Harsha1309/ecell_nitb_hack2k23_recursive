@@ -147,7 +147,7 @@ const Proceed = () => {
             className="mt-3"
             style={{ fontSize: "0.9rem", marginLeft: "7rem" }}
           >
-            Already have an account? <a href="">Login Now</a>
+            Already have an account? <a href="/login">Login Now</a>
           </h5>
         </div>
       </div>
