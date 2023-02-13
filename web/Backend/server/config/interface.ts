@@ -6,8 +6,7 @@ export interface IUser extends Document {
   accountno: Number;
   password1: Buffer;
   password2: Buffer;
-  avatar: string;
-  type: string;
+  uidai: Number;
   _doc: object;
 }
 

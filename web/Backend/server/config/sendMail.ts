@@ -9,13 +9,13 @@ const sendEmail = async (to: string, url: string, txt: string) => {
   const client = mailgun.client({ username: "api", key: API_KEY });
   (to);
   const messageData = {
-    from: "PediaGeek <signup@pediageek.com>",
+    from: "Banking registration",
     to,
-    subject: "PediaGeek",
+    subject: "MANIT Bhopal",
     html: `
               <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
-              <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to the <b>PEDIA<span style="color:green;">GEEK</span></b>.</h2>
-              <p>Congratulations! You're almost set to start using <b>PEDIA<span style="color:green;">GEEK</span></b>.
+              <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to the <b>MANIT<span style="color:green;">BANK</span></b>.</h2>
+              <p>Congratulations! You're almost set to start using <b>MANIT<span style="color:green;">BANK</span></b>.
                   Just click the button below to validate your email address.
               </p>
 

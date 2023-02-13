@@ -35,7 +35,7 @@ const authCtrl = {
 
       // const passwordHash = await bcrypt.hash(password, 12);
 
-      const newUser = { name, accountno, email, uidai };
+      const newUser = { name, accountno, email, uidai, };
 
       const active_token = generateActiveToken({ newUser });
 
@@ -69,21 +69,23 @@ const authCtrl = {
       const decoded = <IDecodedToken>(
         jwt.verify(active_token, `${process.env.ACTIVE_TOKEN_SECRET}`)
       );
-      console.log(decoded);
       const { newUser } = decoded;
-      console.log(newUser);
+
       if (!newUser)
         return res.status(400).json({ msg: "Invalid authentication." });
 
-      const user = await Users.findOne({ email: newUser.email });
-      if (user) return res.status(400).json({ msg: "Account already exists." });
+      // const user = await Users.findOne({ email: newUser.email });
+      // if (user) return res.status(400).json({ msg: "Account already exists." });
 
       const new_user = new Users({
-        ...newUser,
+        name: newUser.name,
+        accountno: newUser.accountno,
+        email: newUser.email,
+        uidai: newUser.uidai,
         password1: password1,
         password2: password2,
       });
-
+      console.log(new_user);
       const newuser = await new_user.save();
       res.json({ msg: "Account has been activated!" });
     } catch (err: any) {
@@ -130,11 +132,6 @@ const authCtrl = {
       if (!user)
         return res.status(400).json({ msg: "This account does not exist." });
 
-      if (user.type !== "register")
-        return res.status(400).json({
-          msg: `Quick login account with ${user.type} can't use this function.`,
-        });
-
       const access_token = generateAccessToken({ id: user._id });
 
       const url = `${CLIENT_URL}/reset_password/${access_token}`;
@@ -151,15 +148,6 @@ const authCtrl = {
 
 const loginUser = async (user: IUser, password: string, res: Response) => {
   const isMatch = true; //here to call python api for validation
-
-  if (!isMatch) {
-    let msgError =
-      user.type === "register"
-        ? "Password is incorrect."
-        : `Password is incorrect. This account login with ${user.type}`;
-
-    return res.status(400).json({ msg: msgError });
-  }
 
   const access_token = generateAccessToken({ id: user._id });
 

@@ -1,9 +1,11 @@
 import React from "react";
+import Toast from "../Alert/Toast";
 import "./Navbar.css";
 
 function Navbar() {
   return (
     <>
+      <Toast />
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <a className="navbar-brand ps-4 fs-3 navi" href="/">

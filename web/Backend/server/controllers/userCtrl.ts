@@ -30,11 +30,6 @@ const userCtrl = {
     if (!req.user)
       return res.status(400).json({ msg: "Invalid Authentication." });
 
-    if (req.user.type !== "register")
-      return res.status(400).json({
-        msg: `Quick login account with ${req.user.type} can't use this function.`,
-      });
-
     try {
       const { password } = req.body;
       const passwordHash = await bcrypt.hash(password, 12);

@@ -12,7 +12,6 @@ const userSchema = new mongoose.Schema(
     companyid: {
       type: mongoose.Types.ObjectId,
       ref: "Company",
-      required: [true, "Please provide your company id"],
     },
     accountno: {
       type: Number,
@@ -26,7 +25,7 @@ const userSchema = new mongoose.Schema(
       trim: true,
       unique: true,
     },
-    adharno: {
+    uidai: {
       type: Number,
       required: [true, "Please add your Adhar number"],
       trim: true,
