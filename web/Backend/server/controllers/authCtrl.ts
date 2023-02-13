@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Users from "../models/userModel";
 import Compnaies from "../models/comanyModel";
 import bcrypt from "bcrypt";
+import axios from "axios";
 import jwt from "jsonwebtoken";
 import {
   generateActiveToken,
@@ -151,12 +152,20 @@ export const loginUser = async (
   password: Buffer,
   res: Response
 ) => {
-  request("http://localhost:6000/", {}, function (error, response, body) {
-    console.error("error:", error); // Print the error
-    console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
-    console.log("body:", body); // Print the data received
-    return res.send({body}); //Display the response on the website
-  });
+  axios
+    .post("http://localhost:6000/match", {
+      img1: password,
+      img2: user.password1,
+    })
+    .then((ret) => {
+      if (ret.data.simmilarity > 81) return res.json({ success: true });
+      else return res.json({ success: false });
+    })
+    .catch((err) => {
+      return res
+        .status(400)
+        .json({ msg: "i am facing some issues try again later." });
+    });
 };
 const registerUser = async (user: IUserParams, res: Response) => {
   const newUser = new Users(user);
