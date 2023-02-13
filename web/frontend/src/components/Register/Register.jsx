@@ -30,9 +30,9 @@ const Register = () => {
       email: email,
       uidai: uidai,
     }).then((res)=>{
-      alert("Email sent verify your email.")
+      alert("Emailhas been sent, kindly verify your email.")
     }).catch((err) => {
-      alert('Please write valid credentials')
+      alert('Some duplicate data or invalid credential has been inserted, kindly check it')
     });
 
   };

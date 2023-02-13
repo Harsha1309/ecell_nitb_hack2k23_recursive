@@ -22,7 +22,7 @@ function Content() {
           password: buffer,
         })
         .then((res) => {
-          alert('Successfully registered');
+          alert('You pattern has been matched,');
         })
         .catch((err) => {
           alert('Please make valid signs')
@@ -103,6 +103,7 @@ function Content() {
           >
             Recover Password?
           </p>
+          <Link to='/user'>
           <button
             type="button"
             className="btn btn-primary mt-3"
@@ -111,6 +112,7 @@ function Content() {
           >
             Sign in
           </button>
+          </Link>
         </div>
       </div>
       <div id="output"></div>
