@@ -31,6 +31,8 @@ const Register = () => {
       uidai: uidai,
     }).then((res)=>{
       alert("Email sent verify your email.")
+    }).catch((err) => {
+      alert('Please write valid credentials')
     });
 
   };

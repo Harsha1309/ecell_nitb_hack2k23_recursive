@@ -22,6 +22,10 @@ function App() {
       org: org,
       email: email,
       password: password,
+    }).then((res)=>{
+      alert("Successfully registered")
+    }).catch((err) => {
+      alert('Please write valid credentials')
     });
   };
 
