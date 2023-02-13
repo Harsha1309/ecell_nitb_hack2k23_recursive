@@ -101,17 +101,19 @@ const Proceed = () => {
           </h2>
           <div>
             <div id="watermark">Draw Here </div>
+            {/* <br /> */}
             <div
               className="patt"
               id="drawpad1"
-              style={{ height: 300, marginTop: 10, marginLeft: 110 }}
+              style={{  height: 'auto',maxWidth:400,overflow:'hidden', marginTop: 10, marginLeft: 115,backgroundColor:'aliceblue'}}
             >
               <SignatureCanvas
                 penColor="black"
                 canvasProps={{
-                  width: 400,
+                  width: 300,
                   height: 300,
                   className: "sigCanvas",
+                  
                 }}
               />
             </div>
@@ -119,17 +121,19 @@ const Proceed = () => {
           <br />
           <div>
             <div id="watermark">Draw Here </div>
+            <br />
             <div
               className="patt"
               id="drawpad2"
-              style={{ height: 300, marginTop: 10, marginLeft: 110 }}
+              style={{  height: 'auto',maxWidth:400,overflow:'hidden', marginTop: 10, marginLeft: 115,backgroundColor:'aliceblue' }}
             >
               <SignatureCanvas
                 penColor="black"
                 canvasProps={{
-                  width: 400,
+                  width: 300,
                   height: 300,
                   className: "sigCanvas",
+                  // backgroundColor:"red"
                 }}
               />
             </div>
@@ -140,7 +144,7 @@ const Proceed = () => {
               backgroundColor: "#769BC1",
               width: "35%",
               color: "white",
-              marginLeft: "7rem",
+              marginLeft: "16rem",
             }}
             onClick={activefun}
           >
@@ -148,7 +152,7 @@ const Proceed = () => {
           </button>
           <h5
             className="mt-3"
-            style={{ fontSize: "0.9rem", marginLeft: "7rem" }}
+            style={{ fontSize: "0.9rem", marginLeft: "16rem" }}
           >
             Already have an account? <a href="/login">Login Now</a>
           </h5>

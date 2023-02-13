@@ -23,6 +23,7 @@ function Content() {
         })
         .then((res) => {
           alert('You pattern has been matched,');
+          <Link to='/user'></Link>
         })
         .catch((err) => {
           alert('Please make valid signs')
@@ -85,7 +86,7 @@ function Content() {
             <div
               className="patt"
               id="drawpad"
-              style={{ height: 300, marginTop: 10, marginLeft: 100 }}
+              style={{ height: 'auto',maxWidth:400,overflow:'hidden', marginTop: 10, marginLeft: 115,backgroundColor:'aliceblue' }}
             >
               <SignatureCanvas
                 penColor="black"
@@ -104,7 +105,6 @@ function Content() {
           >
             Recover Password?
           </p>
-          <Link to='/user'>
           <button
             type="button"
             className="btn btn-primary mt-3"
@@ -113,7 +113,6 @@ function Content() {
           >
             Sign in
           </button>
-          </Link>
         </div>
       </div>
       <div id="output"></div>
