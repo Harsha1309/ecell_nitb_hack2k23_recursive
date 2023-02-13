@@ -29,7 +29,10 @@ const Register = () => {
       accountno: acnum,
       email: email,
       uidai: uidai,
+    }).then((res)=>{
+      alert("Email sent verify your email.")
     });
+
   };
 
   return (

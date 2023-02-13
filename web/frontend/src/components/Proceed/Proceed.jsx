@@ -4,7 +4,6 @@ import SignatureCanvas from "react-signature-canvas";
 import html2canvas from "html2canvas";
 import axios from "axios";
 import { Buffer } from "buffer";
-import Alert from "../Alert/Alert";
 
 const Proceed = () => {
   const queryString = window.location.search;
@@ -144,7 +143,6 @@ const Proceed = () => {
           >
             Proceed
           </button>
-          <Alert/>
           <h5
             className="mt-3"
             style={{ fontSize: "0.9rem", marginLeft: "7rem" }}

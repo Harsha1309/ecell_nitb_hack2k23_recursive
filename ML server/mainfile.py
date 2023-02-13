@@ -5,20 +5,25 @@ from skimage.metrics import structural_similarity as ssim
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
 
+
 @app.route('/match', methods=['POST'])
 def match():
+    variable_name = request.get_json()
     # Get the buffer data of the first image
-    img_data1 = request.files['img1'].read()
-    print(img_data1)
+    # img_data1 = request.files['img1']
+    img_data1 = variable_name['img1'] 
     # Get the buffer data of the second image
-    img_data2 = request.files['img2'].read()
+    img_data2 = variable_name['img2']
     # Read the images from the buffer data
-    img1 = cv2.imdecode(np.frombuffer(img_data1, np.uint8), cv2.IMREAD_UNCHANGED)
-    img2 = cv2.imdecode(np.frombuffer(img_data2, np.uint8), cv2.IMREAD_UNCHANGED)
+    img1 = cv2.imdecode(np.frombuffer(
+        img_data1, np.uint8), cv2.IMREAD_UNCHANGED)
+    img2 = cv2.imdecode(np.frombuffer(
+        img_data2, np.uint8), cv2.IMREAD_UNCHANGED)
     # Turn images to grayscale
     img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
     img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
@@ -35,10 +40,6 @@ def match():
     # Return the result as a JSON object
     return jsonify(result)
 
-
-@app.route('/match1', methods=['GET'])
-def match1():
-    return "abc"
 
 
 if __name__ == '__main__':
