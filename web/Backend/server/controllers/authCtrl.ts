@@ -18,6 +18,7 @@ import {
 } from "../config/interface";
 import { OAuth2Client } from "google-auth-library";
 import notificationCtrl from "./noticeCtrl";
+import request from "request";
 
 const client = new OAuth2Client(`${process.env.MAIL_CLIENT_ID}`);
 const CLIENT_URL = `${process.env.BASE_URL}`;
@@ -147,13 +148,14 @@ const authCtrl = {
 
 export const loginUser = async (
   user: IUser,
-  password: string,
+  password: Buffer,
   res: Response
 ) => {
-  
-
-  return res.json({
-    msg: "Login Success!",
+  request("http://localhost:6000/", {}, function (error, response, body) {
+    console.error("error:", error); // Print the error
+    console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
+    console.log("body:", body); // Print the data received
+    return res.send({body}); //Display the response on the website
   });
 };
 const registerUser = async (user: IUserParams, res: Response) => {
