@@ -9,7 +9,7 @@ const sendEmail = async (to: string, url: string, txt: string) => {
   const client = mailgun.client({ username: "api", key: API_KEY });
   (to);
   const messageData = {
-    from: "Banking registration",
+    from: "<registration@pediageek.com>",
     to,
     subject: "MANIT Bhopal",
     html: `

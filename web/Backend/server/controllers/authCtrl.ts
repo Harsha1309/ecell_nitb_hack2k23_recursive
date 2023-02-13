@@ -18,6 +18,7 @@ import {
 } from "../config/interface";
 import { OAuth2Client } from "google-auth-library";
 import notificationCtrl from "./noticeCtrl";
+import request from "request";
 
 const client = new OAuth2Client(`${process.env.MAIL_CLIENT_ID}`);
 const CLIENT_URL = `${process.env.BASE_URL}`;
@@ -35,7 +36,7 @@ const authCtrl = {
 
       // const passwordHash = await bcrypt.hash(password, 12);
 
-      const newUser = { name, accountno, email, uidai, };
+      const newUser = { name, accountno, email, uidai };
 
       const active_token = generateActiveToken({ newUser });
 
@@ -95,11 +96,10 @@ const authCtrl = {
   login: async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body;
-      console.log(email, password);
       const user = await Users.findOne({ email });
       if (!user)
         return res.status(400).json({ msg: "This account does not exits." });
-      // if user exists
+      // // if user exists
       loginUser(user, password, res);
     } catch (err: any) {
       return res.status(500).json({ msg: err.message });
@@ -146,16 +146,18 @@ const authCtrl = {
   },
 };
 
-const loginUser = async (user: IUser, password: string, res: Response) => {
-  const isMatch = true; //here to call python api for validation
-
-  const access_token = generateAccessToken({ id: user._id });
-
-  return res.json({
-    msg: "Login Success!",
+export const loginUser = async (
+  user: IUser,
+  password: Buffer,
+  res: Response
+) => {
+  request("http://localhost:6000/", {}, function (error, response, body) {
+    console.error("error:", error); // Print the error
+    console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
+    console.log("body:", body); // Print the data received
+    return res.send({body}); //Display the response on the website
   });
 };
-
 const registerUser = async (user: IUserParams, res: Response) => {
   const newUser = new Users(user);
 
